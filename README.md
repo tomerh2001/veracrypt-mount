@@ -17,10 +17,10 @@ docker run -it \
   tomerh2001/veracrypt-mount:latest
 ```
 
-Replace my_password with your VeraCrypt password, /path/to/veracrypt/file with the path to your encrypted VeraCrypt file, and /path/to/output/directory with the path where you want the mounted volume to be accessible.
+Replace `my_password` with your VeraCrypt password, `/path/to/veracrypt/file` with the path to your encrypted VeraCrypt file, and `/path/to/output/directory` with the path where you want the mounted volume to be accessible.
 
 ## Docker Compose Example
-Here's an example docker-compose.yml file using the VeraCrypt Mount image:
+Here's an example `docker-compose.yml` file using the VeraCrypt Mount image:
 
 ```
 version: "3.8"
@@ -38,4 +38,4 @@ volumes:
   encrypted:
 ```
 
-Replace ./veracrypt-file with the path to your encrypted VeraCrypt file.
+Replace `./veracrypt-file` with the path to your encrypted VeraCrypt file.
