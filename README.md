@@ -19,7 +19,7 @@ docker run -it \
 
 Replace my_password with your VeraCrypt password, /path/to/veracrypt/file with the path to your encrypted VeraCrypt file, and /path/to/output/directory with the path where you want the mounted volume to be accessible.
 
-# Docker Compose Example
+## Docker Compose Example
 Here's an example docker-compose.yml file using the VeraCrypt Mount image:
 
 ```
