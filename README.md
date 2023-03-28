@@ -1,41 +1,85 @@
-# VeraCrypt Mount
-This repository provides a Docker image for mounting VeraCrypt encrypted volumes within Docker containers. It supports both single directories and multiple subdirectories within the encrypted volume.
+# VeraCrypt-Mount
+
+This Docker image allows you to mount VeraCrypt encrypted volumes in Docker containers. It supports mounting both single and multiple subdirectories within the encrypted volume. This image can be used in combination with other containers to secure their data using VeraCrypt encryption.
+
+Feeling excited? Let's dive in! 🚀
 
 ## Usage
-1. Pull the Docker image:
 
+### Prerequisites
+- Install [Docker](https://www.docker.com/)
+- Create a VeraCrypt encrypted volume (file container or disk partition)
+
+### Pull the Image
+Pull the `veracrypt-mount` image from Docker Hub:
 ```
 docker pull tomerh2001/veracrypt-mount:latest
 ```
 
-2. Run the container with the necessary environment variables and volumes:
+### Docker Example
+In this example, we will mount a VeraCrypt encrypted file container and bind mount the decrypted content to a local directory on the host. It's as simple as a walk in the park! 🌳
+
+1. Create a local directory for the decrypted content:
 ```
-docker run -it \
-  -e VERACRYPT_PASSWORD=my_password \
-  -v /path/to/veracrypt/file:/encrypted-file \
-  -v /path/to/output/directory:/encrypted \
-  tomerh2001/veracrypt-mount:latest
+mkdir /path/to/decrypted
 ```
 
-Replace `my_password` with your VeraCrypt password, `/path/to/veracrypt/file` with the path to your encrypted VeraCrypt file, and `/path/to/output/directory` with the path where you want the mounted volume to be accessible.
-
-## Docker Compose Example
-Here's an example `docker-compose.yml` file using the VeraCrypt Mount image:
-
+2. Run the `veracrypt-mount` container:
 ```
-version: "3.8"
+docker run --rm
+-e VERACRYPT_PASSWORD=<your_veracrypt_password>
+-e VERACRYPT_SUBDIRECTORIES="subdir1,subdir2,subdir3"
+-v /path/to/encrypted-file:/encrypted-file
+-v /path/to/decrypted:/decrypted
+tomerh2001/veracrypt-mount:latest
+```
+
+
+Replace `<your_veracrypt_password>` with the password for your VeraCrypt volume. Set `VERACRYPT_SUBDIRECTORIES` to a comma-separated list of subdirectories inside the encrypted volume that you want to mount. Adjust the volume paths as needed.
+
+### Docker Compose Example
+In this example, we will use a `docker-compose.yml` file to mount a VeraCrypt encrypted file container and share the decrypted content with other containers. Trust us, it's easier than it sounds! 🎉
+
+1. Create a `docker-compose.yml` file:
+```yaml
+version: '3.8'
 
 services:
   veracrypt:
     image: tomerh2001/veracrypt-mount:latest
     environment:
-      - VERACRYPT_PASSWORD=${VERACRYPT_PASSWORD}
+      - VERACRYPT_PASSWORD=<your_veracrypt_password>
+      - VERACRYPT_SUBDIRECTORIES=subdir1,subdir2,subdir3
     volumes:
-      - ./veracrypt-file:/encrypted-file
-      - encrypted:/encrypted
+      - /path/to/encrypted-file:/encrypted-file
+      - decrypted:/decrypted
+
+  other-service:
+    image: your/other-service
+    volumes:
+      - decrypted:/path/in/other-service
+    depends_on:
+      - veracrypt
 
 volumes:
-  encrypted:
+  decrypted:
 ```
 
-Replace `./veracrypt-file` with the path to your encrypted VeraCrypt file.
+Replace `<your_veracrypt_password>` with the password for your VeraCrypt volume. Set `VERACRYPT_SUBDIRECTORIES` to a comma-separated list of subdirectories inside the encrypted volume that you want to mount. Adjust the volume paths and other service details as needed.
+
+2. Run docker-compose up to start the containers:
+```
+docker-compose up -d
+```
+
+## Additional Configuration
+You can customize the behavior of the veracrypt-mount container by setting environment variables:
+
+* `VERACRYPT_PASSWORD`: The password for the VeraCrypt volume (required)
+* `VERACRYPT_SUBDIRECTORIES`: A comma-separated list of subdirectories inside the encrypted volume to mount (optional, default is to mount the entire volume)
+
+## Contributing
+If you have any questions, suggestions, or improvements, please feel free to submit an issue or pull request on the GitHub repository. Your contributions are welcome!
+
+## License
+This project is licensed under the MIT
