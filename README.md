@@ -82,4 +82,6 @@ You can customize the behavior of the veracrypt-mount container by setting envir
 If you have any questions, suggestions, or improvements, please feel free to submit an issue or pull request on the GitHub repository. Your contributions are welcome!
 
 ## License
-This project is licensed under the MIT
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/tomerh2001/veracrypt-mount/blob/main/LICENSE) file for details.
+
+We hope this Docker image helps make your data more secure and your life a little bit easier. Happy encrypting! 🛡️
