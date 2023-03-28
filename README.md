@@ -80,6 +80,7 @@ You can customize the behavior of the veracrypt-mount container by setting envir
 
 ## Contributing
 If you have any questions, suggestions, or improvements, please feel free to submit an issue or pull request on the GitHub repository. Your contributions are welcome!
+
 We hope this Docker image helps make your data more secure and your life a little bit easier. Happy encrypting! 🛡️
 
 ## License
