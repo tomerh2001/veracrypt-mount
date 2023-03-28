@@ -1,6 +1,6 @@
 # VeraCrypt-Mount
 
-This Docker image allows you to mount VeraCrypt encrypted volumes in Docker containers. It supports mounting both single and multiple subdirectories within the encrypted volume. This image can be used in combination with other containers to secure their data using VeraCrypt encryption.
+This Docker image allows you to mount VeraCrypt encrypted volumes into Docker containers. It supports mounting both single and multiple subdirectories within the encrypted volume. This image can be used in combination with other containers to secure their data using VeraCrypt encryption.
 
 Feeling excited? Let's dive in! 🚀
 
